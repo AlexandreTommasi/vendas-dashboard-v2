@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Vendas - Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>💼 Sistema de Vendas</h1>
+            </div>
+            <div class="nav-info">
+                <span id="db-status" class="status-badge">Verificando conexão...</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2>Dashboard Executivo</h2>
+            <p>Visão geral do desempenho de vendas</p>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card primary">
+                <div class="stat-icon">💰</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="receita-total">R$ 0,00</div>
+                    <div class="stat-label">Receita Total</div>
+                </div>
+            </div>
+            <div class="stat-card success">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="receita-mes">R$ 0,00</div>
+                    <div class="stat-label">Receita Este Mês</div>
+                </div>
+            </div>
+            <div class="stat-card info">
+                <div class="stat-icon">🛒</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="total-vendas">0</div>
+                    <div class="stat-label">Total de Vendas</div>
+                </div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-icon">📦</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="produtos-baixo">0</div>
+                    <div class="stat-label">Produtos Estoque Baixo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="card">
+                <h3>🏆 Top 5 Vendedores do Mês</h3>
+                <div id="ranking-vendedores" class="ranking-container">
+                    <div class="loading">Carregando...</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Produtos Mais Vendidos</h3>
+                <div id="produtos-top" class="chart-container">
+                    <div class="loading">Carregando...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card full-width">
+            <div class="card-header">
+                <h3>💳 Vendas Recentes</h3>
+                <button class="btn-refresh" onclick="carregarVendas()">🔄 Atualizar</button>
+            </div>
+            <div class="table-container">
+                <table id="vendas-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Cliente</th>
+                            <th>Vendedor</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" class="loading">Carregando vendas...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="grid-container">
+            <div class="card">
+                <h3>👥 Vendedores</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Total:</span>
+                        <span class="info-value" id="total-vendedores">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Ativos:</span>
+                        <span class="info-value" id="vendedores-ativos">0</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="verVendedores()">Ver Todos</button>
+            </div>
+
+            <div class="card">
+                <h3>🛍️ Clientes</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Total:</span>
+                        <span class="info-value" id="total-clientes">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Novos (mês):</span>
+                        <span class="info-value" id="clientes-mes">0</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="verClientes()">Ver Todos</button>
+            </div>
+
+            <div class="card">
+                <h3>📦 Produtos</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Total:</span>
+                        <span class="info-value" id="total-produtos">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Em falta:</span>
+                        <span class="info-value text-danger" id="produtos-falta">0</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="verProdutos()">Ver Todos</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>🚀 Sistema de Vendas - Deploy Automático com Azure</p>
+            <p>Pool: <span id="pool-info">expandev</span> | Banco: Azure SQL Database</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
